@@ -7,9 +7,15 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const cors = require('cors');
 
 // Serve the 'public' folder
+// Note: On Vercel, this static serving is often handled by Vercel itself, 
+// but we keep this for local testing compatibility.
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send("SPBAA Payment Server is Running!");
+});
 
 app.post('/create-payment-intent', async (req, res) => {
     const { amount, paymentMethodType, isAutoPay, name, memberNum } = req.body;
@@ -71,4 +77,12 @@ app.post('/create-payment-intent', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 4242;
-app.listen(PORT, () => console.log(`Node server listening on port ${PORT}!`));
+
+// Only run the server on a port if we are NOT in a Vercel environment
+// (Vercel handles the port binding automatically)
+if (require.main === module) {
+    app.listen(PORT, () => console.log(`Node server listening on port ${PORT}!`));
+}
+
+// Export the app for Vercel to load as a serverless function
+module.exports = app;
