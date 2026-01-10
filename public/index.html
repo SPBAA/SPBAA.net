@@ -222,7 +222,12 @@
         // --- CONFIGURATION ---
         // REPLACE WITH YOUR ACTUAL PUBLISHABLE KEY
         const stripePublicKey = 'pk_test_51SnmiNAbuoVPVZze06SHPR3KQ9dNsBvp0XUBre6IRwI1L7BMMBIwherC23cRoPukSuY9EIRguO5amy90JjHpcBwV00TGenrBat'; 
-        const BACKEND_URL = ''; // Relative path
+        
+        // IMPORTANT: Because you are hosting this frontend on GitHub Pages,
+        // you MUST replace the URL below with the actual HTTPS URL of your
+        // deployed backend server (e.g., https://your-project.onrender.com).
+        // It cannot be left empty or set to localhost.
+        const BACKEND_URL = 'https://YOUR_RENDER_OR_RAILWAY_URL_HERE.com'; 
 
         // --- FEE CONFIGURATION ---
         const FEE_CARD_PERCENT = 0.029;
